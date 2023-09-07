@@ -1,6 +1,7 @@
 import permissions from "../model/permissions.model.js";
 
 export async function CreatePermission(req, res) {
+ 
   try {
     await permissions.create({
       ...req.body,

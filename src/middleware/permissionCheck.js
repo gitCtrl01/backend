@@ -12,17 +12,19 @@ export default function PermissionCheck(permission) {
           select: "name",
         },
       });
+      // console.log(user.roles[0].permissions[0].name, permission);
+      // console.log(user.roles[0].permissions[0].name === permission);
       const adminChecker = user.roles.find((data) => {
         return data.name === "admin";
       });
       if (adminChecker) {
+        console.log("admin bhai");
         next();
       } else {
-        if (user.roles[0].permissions[0].name != permission) {
-          res.status(400);
-          res.status("unauthorised");
-        } else {
+        if (user.roles[0].permissions[0].name === permission) {
           next();
+        } else {
+          res.status(400).send("unauthorised");
         }
       }
     } catch (err) {

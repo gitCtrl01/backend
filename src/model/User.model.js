@@ -52,7 +52,6 @@ export function ValidateUserSchema(req, res, next) {
     lastname: Joi.string().required(),
     email: Joi.string().email().required(),
     password: Joi.string(),
-
     phone: Joi.string().min(10).max(12).required(),
     dob: Joi.date().required(),
     interestedEventsCategory: Joi.array(),
@@ -68,7 +67,6 @@ export function ValidateUserSchema(req, res, next) {
     res.status(400);
     res.send(error);
   }
-
 }
 
 export function ValidateLoginSchema(req, res, next) {
@@ -85,5 +83,4 @@ export function ValidateLoginSchema(req, res, next) {
     res.status(400);
     res.send(error);
   }
-
 }
