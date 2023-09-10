@@ -27,7 +27,7 @@ export const getCountryController = async (req, res) => {
       const countries = await CountryModel.find(); 
       res.status(200).send(countries)
     } catch (error) {
-      console.error('Error fetching countries:', error);
+      console.error('Error fetching countries', error);
       res.status(500).json({ error: 'Internal server error' });
     }
   };
