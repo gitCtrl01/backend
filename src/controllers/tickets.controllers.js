@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 
 import eventsModel from "../model/events.model.js";
-import ticketModel from "../model/ticket.model.js";
+import TicketModel from "../model/ticket.model.js";
 
 export async function IssueTicket(req, res) {
   try {
@@ -47,7 +47,7 @@ export async function IssueTicket(req, res) {
 
 export async function DeleteTicket(req, res) {
   try {
-    const ticket = ticketModel.findOneAndRemove({
+    const ticket = TicketModel.findOneAndRemove({
       ticketId: req.body.ticketId,
     });
     if (ticket === null) {
@@ -61,3 +61,4 @@ export async function DeleteTicket(req, res) {
     res.send("bad request");
   }
 }
+

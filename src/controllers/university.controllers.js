@@ -34,6 +34,16 @@ export const deleteUniversityController = async (req, res) => {
       res.status(404).send(err);
     })
     .then((data) => {
-      res.status(200).send("uni deleted");
+      res.status(200).send("university deleted");
     });
 };
+
+export const getUniversityController = async (req, res) => {
+  try {
+      const universities = await UniversityModel.find(); 
+      res.status(200).send(universities)
+    } catch (error) {
+      console.error('Error fetching universities:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };

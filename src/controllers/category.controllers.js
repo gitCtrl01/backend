@@ -21,3 +21,13 @@ export default async function DeleteCategory(req, res) {
     res.send("deleted category");
   } catch (error) {}
 }
+
+export const getCategoryController = async (req, res) => {
+  try {
+      const categories = await categoryModel.find(); 
+      res.status(200).send(categories)
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };

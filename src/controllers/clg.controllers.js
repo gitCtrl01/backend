@@ -43,3 +43,13 @@ export async function DeleteCollegeController(req, res) {
       res.status(200).send("deleted data");
     });
 }
+
+export const getCollegeController = async (req, res) => {
+  try {
+      const colleges = await clgModel.find(); 
+      res.status(200).send(colleges)
+    } catch (error) {
+      console.error('Error fetching colleges:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };

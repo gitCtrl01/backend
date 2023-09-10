@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   CreatePermission,
   DeletePermission,
+  getPermissionController,
 } from "../controllers/permissions.controllers.js";
 import PermissionCheck from "../middleware/permissionCheck.js";
 import { ValidatepermissionSchema } from "../model/permissions.model.js";
@@ -20,5 +21,7 @@ router.delete(
   PermissionCheck("admin"),
   DeletePermission
 );
+router.get("/get", getPermissionController);
+
 
 export default router;

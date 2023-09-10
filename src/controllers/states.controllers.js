@@ -26,3 +26,13 @@ export const deleteStateController = (req, res) => {
     }
   });
 };
+
+export const getStateController = async (req, res) => {
+  try {
+      const states = await StatesModel.find(); 
+      res.status(200).send(states)
+    } catch (error) {
+      console.error('Error fetching states:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };

@@ -22,3 +22,12 @@ export const deleteCountryController = (req, res) => {
       res.status(200).send("country deleted");
     });
 };
+export const getCountryController = async (req, res) => {
+  try {
+      const countries = await CountryModel.find(); 
+      res.status(200).send(countries)
+    } catch (error) {
+      console.error('Error fetching countries:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };

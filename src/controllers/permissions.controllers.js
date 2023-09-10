@@ -1,3 +1,4 @@
+import permissionsModel from "../model/permissions.model.js";
 import permissions from "../model/permissions.model.js";
 
 export async function CreatePermission(req, res) {
@@ -37,3 +38,13 @@ export async function DeletePermission(req, res) {
     throw new Error(error.message);
   }
 }
+
+export const getPermissionController = async (req, res) => {
+  try {
+      const permissions = await permissionsModel.find(); 
+      res.status(200).send(permissions)
+    } catch (error) {
+      console.error('Error fetching permissions:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };

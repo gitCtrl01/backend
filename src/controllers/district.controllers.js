@@ -19,3 +19,13 @@ export async function createDistrictController(req, res) {
     }
   }
 }
+
+export const getDistrictController = async (req, res) => {
+  try {
+      const districts = await DistrictModel.find(); 
+      res.status(200).send(districts)
+    } catch (error) {
+      console.error('Error fetching districts:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };
