@@ -28,7 +28,7 @@ export const createUniversityController = async (req, res) => {
 };
 
 export const deleteUniversityController = async (req, res) => {
-  
+   UniversityModel.find({name:'ram'}).populate("")
   await UniversityModel.findOneAndDelete({ name: req.query.name })
     .catch((err) => {
       res.status(404).send(err);

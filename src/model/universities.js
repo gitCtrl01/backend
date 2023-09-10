@@ -6,6 +6,7 @@ const universitySchema = new Schema({
   },
   state: {
     type: Schema.Types.ObjectId,
+    ref:'states'
   },
   regid: {
     types: Schema.Types.ObjectId,
