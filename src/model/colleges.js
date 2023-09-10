@@ -14,7 +14,7 @@ const clgSchema = new Schema({
   ],
   university: {
     type: Schema.Types.ObjectId,
-    ref:'university'
+    ref: "university",
   },
 });
 
