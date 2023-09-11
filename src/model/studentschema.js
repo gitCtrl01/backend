@@ -52,6 +52,7 @@ const StudentSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  
   role: "student",
 });
 

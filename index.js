@@ -15,6 +15,8 @@ import UniversityRoute from "./src/routes/universities.routes.js";
 import CollegeRoute from "./src/routes/clg.routes.js";
 import DistrictRoutes from "./src/routes/district.routes.js";
 import DepartmentRoute from "./src/routes/departmentRoutes.js";
+import ProfRoute from "./src/routes/professor.routes.js";
+
 //middleware functions
 import { AuthCheck } from "./src/middleware/authCheck.js";
 
@@ -47,6 +49,7 @@ app.use("/district", DistrictRoutes);
 app.use("/university", UniversityRoute);
 app.use("/college", CollegeRoute);
 app.use("/department", DepartmentRoute);
+app.use("/prof", ProfRoute);
 
 //dbConnection
 app.listen(4000, () => {

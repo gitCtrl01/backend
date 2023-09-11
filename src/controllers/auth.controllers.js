@@ -1,4 +1,5 @@
 import { userModel } from "../model/User.model.js";
+import { ProfModel } from "../model/professor.js";
 import rolesModel from "../model/roles.model.js";
 import { AssignJwt } from "../util/Jwt.js";
 import { ComparePassword, HashPassword } from "../util/crypt.js";
@@ -12,7 +13,7 @@ export const Register = async (req, res) => {
       res.status(400);
       res.send("user exist");
     } else {
-      console.log("creating new user ");
+      // console.log("creating new user ");
       if (req.body.roles) {
         const rolesIDFinder = await rolesModel.findOne({
           name: req.body.roles,
@@ -96,6 +97,43 @@ export async function Logout(req, res) {
     res.status(200);
     res.send("cleared cookies");
   } catch (error) {
+    throw new Error(error);
+  }
+}
+
+export async function ProfLogin(req, res) {
+  try {
+    const { email, password } = req.body;
+console.log(password)
+    const userFinder = await ProfModel.findOne({ emailId: email }).populate(
+      "roles"
+    );
+    console.log(userFinder);
+    if (userFinder) {
+      const VerrifyPassowrd = await ComparePassword(
+        password,
+        userFinder.password
+      );
+      if (VerrifyPassowrd === true) {
+        const jwttoken = AssignJwt(email, userFinder._id);
+        res.cookie("userInfo", JSON.stringify(userFinder._doc), {
+          encode: Object,
+        });
+        res.cookie("access_token", JSON.stringify(jwttoken), {
+          encode: Object,
+        });
+        res.status(200);
+        res.send({ token: jwttoken, role: userFinder.roles[0].name });
+      } else {
+        res.status(401);
+        res.send("bad password");
+      }
+    } else {
+      res.status(401);
+      res.send("no user found");
+    }
+  } catch (error) {
+    console.error(error);
     throw new Error(error);
   }
 }

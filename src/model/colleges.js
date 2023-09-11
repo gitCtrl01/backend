@@ -5,6 +5,19 @@ const clgSchema = new Schema({
   name: String,
   state: String,
   district: String,
+  addressl1: String,
+  addressl2: String,
+  principal: String,
+  roles: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "roles",
+    },
+  ],
+  clgtype: {
+    type: String,
+    // enum: ["Private", "Autonomus", "Government"],
+  },
   courses: [
     {
       name: {

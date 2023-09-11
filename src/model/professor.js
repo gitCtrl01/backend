@@ -1,19 +1,20 @@
-import { Schema, Types } from "mongoose";
+import { Schema, Types, model } from "mongoose";
 
-const profJs = new Schema({
+const professorSchema = new Schema({
   firstName: String,
-  LastName: String,
-  College: Schema.Types.ObjectId,
-  universities: Schema.Types.ObjectId,
+  lastName: String,
+  college: {
+    type: Schema.Types.ObjectId,
+    ref: "college",
+  },
+  university: { type: Schema.Types.ObjectId, ref: "university" },
   department: String,
-  email: String,
+  emailId: String,
+  password: String,
   educationBackground: [
     {
       name: String,
-      College: {
-        name: Schema.Types.ObjectId,
-        ref: "college",
-      },
+      College: String,
       passoutDate: Date,
     },
   ],
@@ -27,8 +28,15 @@ const profJs = new Schema({
   ],
   domain: [
     {
-      name: Schema.Types.ObjectId,
-      ref:'domain'
+      name: String,
+    },
+  ],
+  roles: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "roles",
     },
   ],
 });
+
+export const ProfModel = model("professor", professorSchema);
