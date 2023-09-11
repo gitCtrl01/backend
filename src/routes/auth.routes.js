@@ -5,6 +5,6 @@ import { ValidateLoginSchema, ValidateUserSchema } from "../model/User.model.js"
 const router = Router();
 
 router.post("/register",ValidateUserSchema, Register);
-router.post("/login",ValidateLoginSchema, Login);
+router.post("/login", Login);
 router.get('/logout',Logout)
 export default router;

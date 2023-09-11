@@ -55,7 +55,11 @@ export const Register = async (req, res) => {
 export async function Login(req, res) {
   try {
     const { email, password } = req.body;
-    const userFinder = await userModel.findOne({ email: email });
+    console.log(email);
+    const userFinder = await userModel
+      .findOne({ email: email })
+      .populate("roles");
+    console.log(userFinder);
     if (userFinder) {
       const VerrifyPassowrd = await ComparePassword(
         password,
@@ -70,7 +74,7 @@ export async function Login(req, res) {
           encode: Object,
         });
         res.status(200);
-        res.send({ token: jwttoken });
+        res.send({ token: jwttoken, role: userFinder.roles[0].name });
       } else {
         res.status(401);
         res.send("bad password");
