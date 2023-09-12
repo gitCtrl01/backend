@@ -1,6 +1,4 @@
-import mongoose from "mongoose";
-
-const mongoose = require("mongoose");
+import mongoose, { Schema } from "mongoose";
 
 const StudentSchema = new mongoose.Schema({
   firstName: {
@@ -12,7 +10,7 @@ const StudentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  mobileNumber: {
+  phone: {
     type: String,
     required: true,
     minlength: 10,
@@ -22,38 +20,67 @@ const StudentSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  address: {
-    line1: {
-      type: String,
-      required: true,
-    },
-    line2: {
-      type: String,
-    },
-    pinCode: {
-      type: Number,
-      required: true,
-    },
-    state: {
-      type: String,
-      required: true,
-    },
-    district: {
-      type: String,
-      required: true,
-    },
+  password: {
+    type: String,
   },
+
+  addressL1: {
+    type: String,
+    required: true,
+  },
+  addressL2: {
+    type: String,
+  },
+  pincode: {
+    type: Number,
+    required: true,
+  },
+  // state: {
+  //   type: String,
+  //   required: true,
+  // },
+  district: {
+    type: String,
+    required: true,
+  },
+
   gender: {
     type: String,
     required: true,
-    enum: ["Male", "Female", "Others"],
+    // enum: ["Male", "Female", "Others"],
   },
-  dateOfBirth: {
+  dob: {
     type: Date,
     required: true,
   },
-  
-  role: "student",
+  bachloers: {
+    university: {
+      type: String,
+    },
+    college: {
+      type: String,
+    },
+    passingYear: Date,
+    programme: String,
+    CGPA: Number,
+  },
+  master: {
+    university: {
+      type: String,
+    },
+    college: {
+      type: String,
+    },
+    joiningDate: Date,
+    programme: String,
+    CGPA: Number,
+  },
+  roles: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "roles",
+    },
+  ],
 });
 
-module.exports = mongoose.model("student", StudentSchema);
+export const StudentModel = mongoose.model("student", StudentSchema);

@@ -1,6 +1,7 @@
 import { userModel } from "../model/User.model.js";
 import { ProfModel } from "../model/professor.js";
 import rolesModel from "../model/roles.model.js";
+import { StudentModel } from "../model/studentschema.js";
 import { AssignJwt } from "../util/Jwt.js";
 import { ComparePassword, HashPassword } from "../util/crypt.js";
 
@@ -56,11 +57,11 @@ export const Register = async (req, res) => {
 export async function Login(req, res) {
   try {
     const { email, password } = req.body;
-    console.log(email);
-    const userFinder = await userModel
-      .findOne({ email: email })
-      .populate("roles");
-    console.log(userFinder);
+    // console.log(email);
+    const userFinder = await StudentModel.findOne({ emailId: email }).populate(
+      "roles"
+    );
+    console.log(userFinder.roles);
     if (userFinder) {
       const VerrifyPassowrd = await ComparePassword(
         password,
@@ -75,7 +76,7 @@ export async function Login(req, res) {
           encode: Object,
         });
         res.status(200);
-        res.send({ token: jwttoken, role: userFinder.roles[0].name });
+        res.send({ token: jwttoken, role: "student" });
       } else {
         res.status(401);
         res.send("bad password");
@@ -104,7 +105,7 @@ export async function Logout(req, res) {
 export async function ProfLogin(req, res) {
   try {
     const { email, password } = req.body;
-console.log(password)
+    console.log(password);
     const userFinder = await ProfModel.findOne({ emailId: email }).populate(
       "roles"
     );
@@ -135,5 +136,18 @@ console.log(password)
   } catch (error) {
     console.error(error);
     throw new Error(error);
+  }
+}
+
+export async function StudentRegister(req, res) {
+  const studentfinder = await StudentModel.find({ emailId: req.body.emailId });
+  console.log(req.body);
+  if (studentfinder.length === 0) {
+    req.body.password = await HashPassword(req.body.password);
+    StudentModel.create({ ...req.body })
+      .catch((err) => res.status(500).send(err))
+      .then((data) => {
+        res.status(200).send("created Student");
+      });
   }
 }

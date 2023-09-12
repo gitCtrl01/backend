@@ -4,17 +4,23 @@ import { UniversityModel } from "../model/universities.js";
 import { HashPassword } from "../util/crypt.js";
 
 export async function createProfessor(req, res) {
-
   const clgFinder = await clgModel.find({ name: req.body.college });
-  console.log(clgFinder,'hellow');
+
   req.body.college = clgFinder[0]._id;
   const uniFinder = await UniversityModel.find({ name: req.body.university });
   req.body.university = uniFinder[0]._id;
   req.body.password = await HashPassword(req.body.password);
   console.log(req.body);
-  const professor = ProfModel.create({ ...req.body })
-    .then(() => res.status(200).send("done"))
-    .catch((err) => res.status(500).send(err));
+  if (req.body.role) {
+    const professor = ProfModel.create({ ...req.body })
+      .then(() => res.status(200).send("done"))
+      .catch((err) => res.status(500).send(err));
+  } else {
+    req.body.roles = ["65006f3af29e5f14849b4eb3"];
+    const professor = ProfModel.create({ ...req.body })
+      .then(() => res.status(200).send("done"))
+      .catch((err) => res.status(500).send(err));
+  }
 }
 
 export async function getAllProfessors(req, res) {

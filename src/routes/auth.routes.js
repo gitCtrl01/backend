@@ -4,6 +4,7 @@ import {
   Logout,
   ProfLogin,
   Register,
+  StudentRegister,
 } from "../controllers/auth.controllers.js";
 import {
   ValidateLoginSchema,
@@ -18,4 +19,5 @@ router.post("/login", Login);
 router.get("/logout", Logout);
 router.post("/createProf", createProfessor);
 router.post("/proflogin", ProfLogin);
+router.post("/studentRegister", StudentRegister);
 export default router;
