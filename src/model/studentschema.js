@@ -64,7 +64,7 @@ const StudentSchema = new mongoose.Schema({
     programme: String,
     CGPA: Number,
   },
-  master: {
+  masters: {
     university: {
       type: String,
     },
