@@ -3,11 +3,12 @@ import { Schema, model } from "mongoose";
 const projectSchema = new Schema({
   student: {
     type: Schema.Types.ObjectId,
-    ref: "roles",
+    ref: "student",
   },
-  assignedProfessor: {
+  guide: {
     type: Schema.Types.ObjectId,
     ref: "professors",
+    approved:Boolean
   },
   topic: String,
   department: String,

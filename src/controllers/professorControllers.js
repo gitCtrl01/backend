@@ -47,3 +47,18 @@ export async function getPendingInvites(req, res) {
     })
     .catch((err) => res.send(200).send("internal err"));
 }
+
+export async function ApproveGuide(req, res) {
+  const z = Decode(req.headers.authorization);
+
+  const projectUpdater = await ProjectModel.findByIdAndUpdate(req.body._id, {
+    guide: z.id,
+    askedProf: z.id,
+  })
+    .then((data) => {
+      res.status(200).send("approved guide");
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+}
