@@ -1,5 +1,5 @@
-import { getStudentController } from "../controllers/students.controllers";
-import { StudentModel } from "../model/studentschema";
+import { getStudentController } from "../controllers/students.controllers.js";
+import { StudentModel } from "../model/studentschema.js";
 import { Router } from "express";
 
 const router = Router();

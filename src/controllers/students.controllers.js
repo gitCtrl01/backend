@@ -1,4 +1,4 @@
-import { StudentModel } from "../model/studentschema";
+import { StudentModel } from "../model/studentschema.js";
 
 export const getStudentController = async (req, res) => {
     try {
