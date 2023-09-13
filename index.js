@@ -17,6 +17,7 @@ import DistrictRoutes from "./src/routes/district.routes.js";
 import DepartmentRoute from "./src/routes/departmentRoutes.js";
 import ProfRoute from "./src/routes/professor.routes.js";
 import MlRoute from "./src/routes/mlRoutes.js";
+import ProjectRoute from "./src/routes/projectRoutes.js";
 
 //middleware functions
 import { AuthCheck } from "./src/middleware/authCheck.js";
@@ -51,7 +52,8 @@ app.use("/university", UniversityRoute);
 app.use("/college", CollegeRoute);
 app.use("/department", DepartmentRoute);
 app.use("/prof", ProfRoute);
-app.use('/MLApi',MlRoute)
+app.use("/MLApi", MlRoute);
+app.use("/project", ProjectRoute);
 
 //dbConnection
 app.listen(4000, () => {

@@ -75,6 +75,10 @@ const StudentSchema = new mongoose.Schema({
     programme: String,
     CGPA: Number,
   },
+  project: {
+    type: Schema.Types.ObjectId,
+    ref: "project",
+  },
   roles: [
     {
       type: Schema.Types.ObjectId,
