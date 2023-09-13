@@ -37,6 +37,12 @@ const professorSchema = new Schema({
       ref: "roles",
     },
   ],
+  assignedDissertation: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "projects",
+    },
+  ],
 });
 
 export const ProfModel = model("professor", professorSchema);

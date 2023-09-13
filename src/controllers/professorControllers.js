@@ -1,6 +1,8 @@
 import { clgModel } from "../model/colleges.js";
 import { ProfModel } from "../model/professor.js";
+import { ProjectModel } from "../model/projectSchema.js";
 import { UniversityModel } from "../model/universities.js";
+import { Decode } from "../util/Jwt.js";
 import { HashPassword } from "../util/crypt.js";
 
 export async function createProfessor(req, res) {
@@ -31,4 +33,17 @@ export async function getAllProfessors(req, res) {
   } catch (error) {
     throw error;
   }
+}
+
+export async function getPendingInvites(req, res) {
+  const { email, id } = await Decode(req.headers.authorization);
+  // console.log(id, req.headers.authorization, email);
+  // console.log(email);
+  const getInvites = await ProjectModel.find()
+    .populate("askedProf")
+    .populate("student")
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((err) => res.send(200).send("internal err"));
 }

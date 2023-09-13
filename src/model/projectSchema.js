@@ -18,12 +18,11 @@ const projectSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "university",
   },
-  askedProf: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "professors",
-    },
-  ],
+  askedProf: {
+    type: Schema.Types.ObjectId,
+    ref: "professor",
+  },
+
   ethicsCommittee: {
     approved: Boolean,
     committee: {

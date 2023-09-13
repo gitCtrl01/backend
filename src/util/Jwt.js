@@ -12,7 +12,7 @@ export function VerifyJwt(password) {
 }
 
 export async function Decode(authorization) {
-  return Jwt.verify(
+  return await Jwt.verify(
     authorization.slice(7, authorization.length),
     process.env.Jwt_Secret
   );
